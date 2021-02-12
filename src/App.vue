@@ -7,7 +7,6 @@
 
     <main
       class="no-padding main-container"
-      :style="{ 'grid-template-rows': gridRows }"
     >
       <div
         v-if="i18nEnabled"
@@ -24,21 +23,22 @@
       </div>
 
       <div
-        class="locations-and-map-panels-holder"
+        class="locations-and-map-panels-holder columns"
       >
         <div
           v-show="locationsPanelVisible"
-          class="locations-panel-holder"
+          class="locations-panel-holder column"
         >
           LOCATIONS PANEL HOLDER
         </div>
 
         <div
           v-show="mapPanelVisible"
-          class="map-panel-holder"
+          class="map-panel-holder column"
         >
           MAP PANEL HOLDER
         </div>
+
       </div>
 
       <div
@@ -174,7 +174,7 @@ export default {
     },
   },
   mounted() {
-    this.handleResize();
+    // this.handleResize();
     if (!this.i18nEnabled) {
       this.$data.buttonText = this.$data.isMapVisible ? 'Toggle to resource list' : 'Toggle to map';
     } else {
@@ -199,11 +199,13 @@ export default {
         if (isMobile) {
           let offsetHeight = headerOffsetHeight;
           console.log('handleResize isMobile, offsetHeight:', offsetHeight, 'headerOffsetHeight:', headerOffsetHeight, 'footerOffsetHeight:', footerOffsetHeight);
-          main.style['min-height'] = `calc(100vh - ${headerOffsetHeight}px)`;
+          // main.style['min-height'] = `calc(100vh - ${headerOffsetHeight}px)`;
+          main.style['height'] = `calc(100vh - ${headerOffsetHeight}px)`;
         } else {
           let offsetHeight = headerOffsetHeight + footerOffsetHeight;
           console.log('handleResize is NOT mobile, offsetHeight:', offsetHeight, 'headerOffsetHeight:', headerOffsetHeight, 'footerOffsetHeight:', footerOffsetHeight);
-          main.style['min-height'] = `calc(100vh - ${offsetHeight}px)`;
+          // main.style['min-height'] = `calc(100vh - ${offsetHeight}px)`;
+          main.style['height'] = `calc(100vh - ${offsetHeight}px)`;
         }
       });
     },
@@ -234,6 +236,11 @@ export default {
 
 @import "./assets/scss/main.scss";
 
+// html, body {
+//   box-sizing: border-box;
+//   height: 100%;
+// }
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -252,48 +259,46 @@ export default {
 
 .main-container {
   display: flex;
+  display: -ms-flexbox;
   flex-direction: column;
-  // display: -ms-grid;
-  // grid-gap: 1px;
-  // grid-template-columns: 1fr 1fr;
-  // -ms-grid-columns: 1fr 1fr;
-  // grid-template-rows: 40px auto 40px;
+  // height: 300px;
+  background-color: red;
 }
 
 .locations-and-map-panels-holder {
+  flex-grow: 1;
+  // flex: 1 0 0;
+  // -ms-flex: 1 0 0;
+  // flex: 1;
   display: flex;
+  display: -ms-flexbox;
   flex-direction: row;
+  margin: 0px !important;
+  background-color: yellow;
 }
 
 @media screen and (max-width: 767px) {
   .locations-panel-holder {
-    // grid-column: 1 / 3;
-    // grid-column: 1 / -1;
   }
 
   .map-panel-holder {
-    // grid-column: 1 / 3;
-    // grid-column: 1 / -1;
   }
 }
 
-.main-container > div {
-  // display: flex;
-  // justify-content: center;
-  // align-items: center;
-  // font-size: 2em;
-}
+// .main-container > div {
+//   // flex: 1;
+//   // display: flex;
+//   // justify-content: center;
+//   // align-items: center;
+//   // font-size: 2em;
+// }
 
 .i18n-panel-holder {
   background-color: white;
-  // grid-column: 1 / -1;
-  // grid-column: 1 / 3;
 }
 
 .refine-panel-holder {
   background-color: #f0f0f0;
-  // grid-column: 1 / -1;
-  // grid-column: 1 / 3;
 }
 
 .locations-panel-holder {
@@ -302,11 +307,11 @@ export default {
 
 .map-panel-holder {
   background-color: #ff6f69;
+  // height: 100%;
 }
 
 .toggle-button {
-  // grid-column: 1 / -1
-  // grid-column: 1 / 3
+  background-color: #d2d2d2;
 }
 
 ::-webkit-scrollbar {
