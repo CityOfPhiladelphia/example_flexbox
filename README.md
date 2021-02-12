@@ -1,4 +1,6 @@
-# example_flexbox
+# example_cssgrid
+
+The purpose of this example is to design an app that looks like an app created with pinboard, using phila-ui for the header and footer, and flexbox for the main layout.
 
 ## Project setup
 ```
